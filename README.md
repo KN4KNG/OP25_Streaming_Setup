@@ -88,57 +88,71 @@ Once you are sure everything is working begin to create your services. With serv
 
 1. Create a new service file by running the following command:
     
-    bash
-    
-    sudo nano /etc/systemd/system/op25.service 
+    ```sudo nano /etc/systemd/system/op25.service``` 
 
 2. Paste the following content into the file:
+
+    ```[Unit] 
+    Description=OP25 Trunked P25 Decoder 
+    After=network.target 
     
-    makefile
+    [Service] 
+    Type=simple 
+    ExecStart=/usr/local/bin/op25 -S <your P25 system file> -g <your P25 system group> -2 -T trunk.tsv -V -U -A fastlane-verbose -o /tmp/p25audio 
+    Restart=always 
+    RestartSec=10 
+    User=root 
     
-    [Unit] Description=OP25 Trunked P25 Decoder After=network.target [Service] Type=simple ExecStart=/usr/local/bin/op25 -S <your P25 system file> -g <your P25 system group> -2 -T trunk.tsv -V -U -A fastlane-verbose -o /tmp/p25audio Restart=always RestartSec=10 User=root [Install] WantedBy=multi-user.target 
+    [Install] 
+    WantedBy=multi-user.target```
 
 Replace the placeholders with your actual values.
 3. Save the file and exit the text editor.
 4. Reload the Systemd configuration by running the following command:
     
-    sudo systemctl daemon-reload 
+    ```sudo systemctl daemon-reload``` 
 
 5. Start the OP25 service by running the following command:
-    
-    sql
-    
-    sudo systemctl start op25 
+
+    ```sudo systemctl start op25```
 
 You can check the status of the service by running:
-    
-    lua
-    
-    sudo systemctl status op25 
+   
+    ```sudo systemctl status op25```
 
 ## Darkice Service
 
 1. Create a new service file by running the following command:
     
-    bash
-    
-    sudo nano /etc/systemd/system/darkice.service 
+    ```sudo nano /etc/systemd/system/darkice.service```
 
 2. Paste the following content into the file:
     
     makefile
     
-    [Unit] Description=Darkice Audio Streaming Client After=network.target [Service] Type=simple ExecStart=/usr/bin/darkice -c /etc/darkice.cfg -R 2 -i /tmp/p25audio Restart=always RestartSec=10 User=root [Install] WantedBy=multi-user.target 
+    ```[Unit] 
+    Description=Darkice Audio Streaming Client 
+    After=network.target 
+    
+    [Service] 
+    Type=simple 
+    ExecStart=/usr/bin/darkice -c /etc/darkice.cfg -R 2 -i /tmp/p25audio 
+    Restart=always 
+    RestartSec=10 
+    User=root 
+    
+    [Install] 
+    WantedBy=multi-user.target```
 
 3. Save the file and exit the text editor.
 4. Reload the Systemd configuration by running the following command:
     
-    sudo systemctl daemon-reload 
+    ```sudo systemctl daemon-reload```
 
 5. Start the Darkice service by running the following command:
    
-    sudo systemctl start darkice 
+    ```sudo systemctl status darkice``` 
 
 You can check the status of the service by running:
        
-    sudo systemctl status darkice 
+   ```sudo systemctl status darkice```
