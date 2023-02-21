@@ -25,7 +25,30 @@ We'll use Darkice to stream the audio to Broadcastify. Install Darkice using the
 
 Configure Darkice by creating a new file at /etc/darkice.cfg and pasting the following configuration:
     
-    [general] duration = 0 bufferSecs = 5 reconnect = yes reconnectDelay = 5 [input] device = pulse sampleRate = 44100 bitsPerSample = 16 channel = 2 samplerateConv = none [icecast2-0] bitrateMode = cbr format = mp3 bitrate = 128 server = <your broadcastify server> port = 80 password = <your broadcastify password> mountPoint = <your mount point> name = <your stream name> genre = <your genre> url = <your website> public = yes 
+    [general] 
+    duration = 0 
+    bufferSecs = 5 
+    reconnect = yes 
+    reconnectDelay = 5 
+    
+    [input] device = pulse 
+    sampleRate = 44100 
+    bitsPerSample = 16 
+    channel = 2 
+    samplerateConv = none 
+    
+    [icecast2-0] 
+    bitrateMode = cbr 
+    format = mp3 
+    bitrate = 128 
+    server = <your broadcastify server> 
+    port = 80 
+    password = <your broadcastify password> 
+    mountPoint = <your mount point> 
+    name = <your stream name> 
+    genre = <your genre> 
+    url = <your website> 
+    public = yes 
 
 Replace the placeholders with your actual values.
 
